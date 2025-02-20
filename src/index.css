@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+:root {
+  font-family: system-ui, Helvetica, Arial, sans-serif;
+ 
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+ 
+}
+
+ body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+
+
+} 
+
+html, body, #root, .App
+{
+  min-height: 100%;
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+}

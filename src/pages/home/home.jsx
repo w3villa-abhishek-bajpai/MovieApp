@@ -8,13 +8,13 @@ const Home = () => {
   const [popularMovies, setPopularMovies] = useState([]);
 
   useEffect(() => {
-    fetch("http://www.omdbapi.com/?s=Avengers&apikey=7b853542") // 's' for searching movies
+    fetch("http://www.omdbapi.com/?s=Avengers&apikey=7b853542")
       .then((res) => res.json())
       .then((data) => {
         if (data.Search) {
-          setPopularMovies(data.Search); // Correct way to access movies
+          setPopularMovies(data.Search);
         } else {
-          setPopularMovies([]); // Handle case where no results are found
+          setPopularMovies([]);
         }
       })
       .catch((error) => console.error("Error fetching movies:", error));
@@ -22,13 +22,14 @@ const Home = () => {
 
   return (
     <>
-      <div className="w-full min-h-screen bg-gray-900 text-white">
+      <div className="w-full  h-[500px] sm:h-[610px] md:h-[720px] lg:h-[840px] bg-gray-900 text-white border-2 border-red-400 ">
         <Carousel
-          showThumbs={false}
+          // showThumbs={false}
           autoPlay={true}
           transitionTime={3}
           infiniteLoop={true}
           showStatus={false}
+          
         >
           {popularMovies.length > 0 ? (
             popularMovies.map((movie) => (
@@ -37,17 +38,29 @@ const Home = () => {
                 to={`/movie/${movie.omdbID}`}
                 className="no-underline text-white"
               >
-                <div className="relative w-full">
-                  <img
-                    src={movie.Poster !== "N/A" ? movie.Poster : "https://via.placeholder.com/300"}
-                    alt={movie.Title}
-                    className="w-full h-[500px] object-cover"
-                  />
-                  <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-6">
-                    <h2 className="text-2xl font-bold">{movie.Title}</h2>
-                    <div className="flex items-center gap-2 text-lg">
-                      <span>{movie.Year}</span>
-                    </div>
+                <div className="relative w-full h-[500px] sm:h-[600px] md:h-[700px] lg:h-[800px] flex items-center justify-center ">
+                  
+                  {/* Blurred Background Image */}
+                  <div
+                    className="absolute  w-full h-full  bg-cover bg-center blur-lg brightness-50"
+                    style={{
+                      backgroundImage: `url(${movie.Poster !== "N/A" ? movie.Poster : "https://via.placeholder.com/600"})`,
+                    }}
+                  ></div>
+
+                  {/* Foreground Movie Poster (Bigger & Responsive) */}
+                  <div className="relative  flex justify-center items-center h-full">
+                    <img
+                      src={movie.Poster !== "N/A" ? movie.Poster : "https://via.placeholder.com/600"}
+                      alt={movie.Title}
+                      className="w-[80%] sm:w-[60%] md:w-[55%] lg:w-[55%] min-h-[600px] object-contain drop-shadow-2xl rounded-lg border-4 border-white"
+                    />
+                  </div>
+
+                  {/* Movie Title Overlay */}
+                  <div className="absolute bottom-10 left-0 right-0 text-center p-4 bg-black/60">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold">{movie.Title}</h2>
+                    <p className="text-lg sm:text-xl text-gray-300">{movie.Year}</p>
                   </div>
                 </div>
               </Link>
@@ -56,6 +69,8 @@ const Home = () => {
             <p className="text-center text-lg">No movies found.</p>
           )}
         </Carousel>
+
+        {/* Movie List Section */}
         <MovieList />
       </div>
     </>

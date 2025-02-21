@@ -15,25 +15,26 @@ const Cards = ({ movie }) => {
   return (
     <>
       {isLoading ? (
-        <div className="inline-block transition-transform duration-200 relative rounded-lg overflow-hidden m-1 cursor-pointer min-w-[200px] h-[300px] border border-gray-600">
+        <div className="w-[280px] h-[420px] rounded-lg overflow-hidden border border-gray-600">
           <SkeletonTheme color="#202020" highlightColor="#444">
-            <Skeleton height={300} duration={2} />
+            <Skeleton height={420} duration={2} />
           </SkeletonTheme>
         </div>
       ) : (
-        <Link to={`/movie/${movie.imdbID}`} className="no-underline text-white">
-          <div className="inline-block transition-transform duration-200 relative rounded-lg overflow-hidden m-1 cursor-pointer min-w-[200px] h-[300px] border border-gray-600 hover:scale-110 hover:z-50 shadow-lg">
+        <Link to={`/movie/${movie.omdbID}`} className="no-underline text-white">
+          <div className="relative w-[280px] sm:w-[300px] md:w-[320px] lg:w-[340px] h-[420px] sm:h-[440px] md:h-[460px] lg:h-[480px] rounded-lg overflow-hidden border border-gray-700 shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
+            
             {/* Movie Poster */}
             <img
-              className="h-full w-full object-cover"
-              src={movie?.Poster !== "N/A" ? movie?.Poster : "https://via.placeholder.com/300"}
+              className="w-full h-full object-cover"
+              src={movie?.Poster !== "N/A" ? movie?.Poster : "https://via.placeholder.com/400"}
               alt={movie?.Title}
             />
 
-            {/* Overlay */}
-            <div className="absolute bottom-0 left-0 p-4 h-[290px] w-[85%] flex flex-col justify-end bg-gradient-to-t from-black via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-200">
-              <div className="font-bold text-lg mb-2">{movie?.Title}</div>
-              <div className="text-sm mb-1">{movie?.Year}</div>
+            {/* Overlay for Movie Title & Year */}
+            <div className="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black via-transparent to-transparent opacity-90 hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end text-center">
+              <h3 className="text-lg font-bold mb-1">{movie?.Title}</h3>
+              <p className="text-sm text-gray-300">{movie?.Year}</p>
             </div>
           </div>
         </Link>

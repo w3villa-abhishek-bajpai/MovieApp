@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Cards from "../card/card";
+import { Search } from "lucide-react";
 
 const MovieList = () => {
   const [movieList, setMovieList] = useState([]);
@@ -9,8 +10,18 @@ const MovieList = () => {
   const { type } = useParams();
 
   useEffect(() => {
-    getData(type ? type : "Avengers"); // Default to Avengers when no type is provided
+    getData(type ? type : "Avengers");
   }, [type]);
+
+  useEffect(() => {
+    const delaySearch = setTimeout(() => {
+      if (searchQuery.trim() !== "") {
+        getData(searchQuery);
+      }
+    }, 500); // Add a small delay to avoid excessive API calls
+
+    return () => clearTimeout(delaySearch);
+  }, [searchQuery]);
 
   const getData = async (query) => {
     try {
@@ -22,7 +33,8 @@ const MovieList = () => {
       });
 
       if (response.data.Search) {
-        setMovieList(response.data.Search);
+        // Display only the first 12 movies
+        setMovieList(response.data.Search.slice(0, 12));
       } else {
         setMovieList([]);
       }
@@ -31,44 +43,28 @@ const MovieList = () => {
     }
   };
 
-  // Handle search form submission
-  const handleSearch = (e) => {
-    e.preventDefault();
-    if (searchQuery.trim() !== "") {
-      getData(searchQuery);
-    }
-  };
-
   return (
-    <div className="px-12 pb-12">
+    <div className="w-full min-h-screen bg-gradient-to-b from-gray-900 to-black text-white px-6 py-10">
       {/* Search Bar */}
-      <form onSubmit={handleSearch} className="flex justify-center mb-6">
+      <div className="flex justify-center items-center w-full max-w-4xl mx-auto min-h-[70px] p-3 relative">
         <input
           type="text"
-          placeholder="Search movies..."
+          placeholder="Search for a movie..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-1/2 p-2 border border-gray-400 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full h-[50px] px-4 pl-12 border border-gray-500 bg-gray-800 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
-        <button
-          type="submit"
-          className="p-2 bg-blue-600 text-white rounded-r-md hover:bg-blue-700"
-        >
-          🔍
-        </button>
-      </form>
+        <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={24} />
+      </div>
 
-      {/* Section Title */}
-      <h2 className="text-2xl font-bold my-10 text-center">
-        {(type ? type : "POPULAR").toUpperCase()}
-      </h2>
-
-      {/* Movie Cards List */}
-      <div className="flex flex-wrap justify-center gap-4">
+      {/* Movie Cards Grid (Responsive Layout) */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center mt-6">
         {movieList.length > 0 ? (
-          movieList.map((movie) => <Cards key={movie.omdbID} movie={movie} />)
+          movieList.map((movie, index) => (
+            <Cards key={movie.imdbID || index} movie={movie} />
+          ))
         ) : (
-          <p className="text-white text-center text-lg">No movies found.</p>
+          <p className="col-span-4 text-center text-lg">No movies found.</p>
         )}
       </div>
     </div>

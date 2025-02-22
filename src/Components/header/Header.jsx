@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -12,12 +13,12 @@ const Header = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // ✅ Load "Avengers" by default
+  // Load "Avengers" by default
   useEffect(() => {
     getData("Avengers");
   }, []);
 
-  // ✅ Fetch movies while typing
+  //  Fetch movies while typing
   useEffect(() => {
     if (searchQuery.trim() !== "") {
       const delaySearch = setTimeout(() => {
@@ -27,7 +28,7 @@ const Header = () => {
     }
   }, [searchQuery]);
 
-  // ✅ Fetch movies from API
+  //  Fetch movies from API
   const getData = async (query) => {
     try {
       const response = await axios.get("http://www.omdbapi.com/", {

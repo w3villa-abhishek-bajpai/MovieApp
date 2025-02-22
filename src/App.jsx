@@ -1,26 +1,37 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useSelector } from "react-redux";
 import Header from "./Components/header/Header";
 import Home from "./pages/home/home";
 import MovieList from "./Components/movieList/movieList";
 import Movie from "./pages/home/movieDetail/movie";
 import Login from "./pages/auth/Login";
-import Signup from "./pages/auth/Signup"
+import Signup from "./pages/auth/Signup";
+import ProtectedRoute from "./ProtectedRoute"; // ✅ Import ProtectedRoute
 
 function App() {
   return (
-    <div className="App">
+    <div className="md:min-w-[99vw]">
       <Router>
         <Header />
         <Routes>
-          <Route index element={<Home />} />
-          <Route path="movie/:id" element={<Movie />} />
-          <Route path="movies/:type" element={<MovieList />} />
-          
-          {/* ✅ Add Login & Signup Routes */}
-          <Route path="/login" element={<Login isSignup={false} />} />
-          <Route path="/signup" element={<Signup isSignup={true} />} />
-          
+          {/* ✅ Protect the Home Route */}
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="movie/:id" element={ <ProtectedRoute>
+                <Movie />
+              </ProtectedRoute>} />
+          <Route path="movies/:type" element={ <ProtectedRoute>
+                <MovieList />
+              </ProtectedRoute>} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
           <Route path="*" element={<h1>Error Page</h1>} />
         </Routes>
       </Router>

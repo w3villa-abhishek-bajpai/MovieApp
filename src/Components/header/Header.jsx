@@ -46,7 +46,7 @@ const Header = () => {
   };
 
   return (
-    <div className="w-full h-[80px] px-6 py-4 flex items-center justify-between bg-gray-900 bg-opacity-80 backdrop-blur-lg shadow-lg border-3 border-white">
+    <div className="w-full h-[80px] px-6 py-4 flex items-center justify-between bg-gray-900 bg-opacity-80 backdrop-blur-lg shadow-lg ">
       {/* IMDb Logo */}
       <div className="flex items-center">
         <Link to="/">
@@ -59,7 +59,7 @@ const Header = () => {
       </div>
 
       {/* Desktop Navigation */}
-      <div className="hidden lg:flex items-center gap-8">
+      <div className="hidden lg:flex items-center gap-8 border-2 border-white">
         <Link
           to="/movies/popular"
           className="text-lg text-white hover:text-red-500 transition duration-200"
@@ -81,7 +81,7 @@ const Header = () => {
       </div>
 
       {/* Search Bar */}
-      <div className="relative w-full max-w-[250px] sm:max-w-[300px] md:max-w-[350px] lg:max-w-[400px]">
+      <div className=" w-full max-w-[250px] sm:max-w-[300px] md:max-w-[350px] lg:max-w-[400px] border-2 border-white rounded-lg">
         <input
           type="text"
           placeholder="Search movies..."
@@ -141,7 +141,7 @@ const Header = () => {
 
       {/* Mobile Navigation */}
       <div
-        className={`absolute top-[80px] left-0 w-full bg-gray-900  flex flex-col items-center gap-6 py-6 transition-all duration-300 ${
+        className={`absolute top-[80px] left-0 w-full bg-white  flex flex-col items-center gap-6 py-6 transition-all duration-300 ${
           isMenuOpen ? "block" : "hidden"
         }`}
       >
@@ -169,7 +169,7 @@ const Header = () => {
 
         {user ? (
           <>
-            <span className="text-white font-semibold">Welcome, {user}</span>
+            <span className="text-white  font-semibold w-[120px] h-[45px] flex items-center justify-center border-2 border-green-500">Welcome, {user}</span >
             <button
               onClick={() => {
                 dispatch(logout());

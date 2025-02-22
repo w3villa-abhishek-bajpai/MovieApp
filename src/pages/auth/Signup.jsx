@@ -33,13 +33,24 @@ const Signup = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-900 text-white">
-      <div className="w-full max-w-md p-8 bg-gray-800 rounded-lg shadow-lg">
-        <h2 className="text-2xl font-bold text-center mb-6">Sign Up</h2>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-gray-900">
+      {/* Header */}
 
-        {error && <p className="text-red-500 text-sm text-center">{error}</p>}
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      {/* Signup Form Container */}
+      <div className="w-full max-w-lg bg-white p-8 rounded-lg shadow-lg border border-gray-300">
+        <h2 className="text-2xl font-semibold text-center mb-6">Create an account</h2>
+
+        {error && <p className="text-red-500 text-sm text-center mb-4">{error}</p>}
+
+        <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+          <input
+            type="text"
+            name="name"
+            placeholder="Full Name"
+            required
+            className="w-full p-3 rounded-md bg-gray-100 border border-gray-300 text-lg focus:ring-2 focus:ring-blue-500"
+          />
           <input
             type="email"
             name="email"
@@ -47,7 +58,7 @@ const Signup = () => {
             value={formData.email}
             onChange={handleChange}
             required
-            className="p-3 rounded bg-gray-700 border border-gray-600 focus:ring focus:ring-green-500"
+            className="w-full p-3 rounded-md bg-gray-100 border border-gray-300 text-lg focus:ring-2 focus:ring-blue-500"
           />
           <input
             type="password"
@@ -56,17 +67,33 @@ const Signup = () => {
             value={formData.password}
             onChange={handleChange}
             required
-            className="p-3 rounded bg-gray-700 border border-gray-600 focus:ring focus:ring-green-500"
+            className="w-full p-3 rounded-md bg-gray-100 border border-gray-300 text-lg focus:ring-2 focus:ring-blue-500"
           />
-          <button type="submit" className="p-3 bg-green-600 rounded hover:bg-green-700 transition">
+          
+          {/* Signup Button */}
+          <button
+            type="submit"
+            className="w-full p-3 bg-blue-600 text-white text-lg font-semibold rounded-md hover:bg-blue-700 transition"
+          >
             Sign Up
           </button>
         </form>
 
-        <p className="text-center mt-4 text-sm">
+        {/* Divider */}
+        <div className="flex items-center my-4">
+          <div className="flex-1 border-t border-gray-300"></div>
+          <p className="px-3 text-sm text-gray-500">OR</p>
+          <div className="flex-1 border-t border-gray-300"></div>
+        </div>
+
+        {/* Login Link */}
+        <p className="text-center text-sm">
           Already have an account?{" "}
-          <span className="text-green-400 cursor-pointer hover:underline" onClick={() => navigate("/login")}>
-            Login
+          <span
+            className="text-blue-500 font-semibold cursor-pointer hover:underline"
+            onClick={() => navigate("/login")}
+          >
+            Log In
           </span>
         </p>
       </div>

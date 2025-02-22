@@ -25,22 +25,22 @@ const Movie = () => {
     };
 
     return (
-        <div className="w-screen h-screen bg-gradient-to-b from-gray-900 to-black text-white flex flex-col items-center py-10 px-5">
+        <div className="w-full h-full bg-gradient-to-b from-gray-900 to-black text-white flex flex-col items-center py-10 px-5">
             {currentMovieDetail ? (
                 <>
                     {/* Blurred Background Image */}
                     <div
-                        className="absolute inset-0 w-full h-full bg-cover bg-center blur-lg brightness-50"
+                        className="absolute inset-0 w-full bg-cover bg-center blur-lg brightness-5"
                         style={{
                             backgroundImage: `url(${currentMovieDetail.Poster !== "N/A" ? currentMovieDetail.Poster : "https://via.placeholder.com/600"})`,
                         }}
                     ></div>
 
                     {/* Movie Content */}
-                    <div className="relative z-10 w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-xl shadow-lg p-8 flex flex-col items-center text-center">
+                    <div className="relative z-10 w-full  max-w-5xl  backdrop-blur-lg rounded-xl shadow-lg p-8 flex flex-col items-center text-center">
                         {/* Movie Poster */}
                         <img
-                            className="w-[250px] sm:w-[300px] md:w-[350px] lg:w-[400px] rounded-lg shadow-xl transform hover:scale-105 transition"
+                            className="w-[250px] h-[400px] sm:w-[300px] md:w-[350px] lg:w-[400px] rounded-lg shadow-xl transform hover:scale-105 transition"
                             src={currentMovieDetail.Poster !== "N/A" ? currentMovieDetail.Poster : "https://via.placeholder.com/400"}
                             alt={currentMovieDetail.Title}
                         />

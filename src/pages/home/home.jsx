@@ -176,7 +176,7 @@ const Home = () => {
                 <div className="relative w-full h-[500px] sm:h-[605px] md:h-[710px] lg:h-[790px] flex items-center justify-center border-2 border-amber-500">
                   {/* Full-Size Background Image (NO BLUR) */}
                   <div
-                    className="absolute inset-0 w-full h-full bg-cover bg-center brightness-"
+                    className="absolute inset-0 w-full h-full bg-cover bg-center brightness-7"
                     style={{
                       backgroundImage: `url(${
                         movie.Poster !== "N/A"
@@ -187,7 +187,7 @@ const Home = () => {
                   ></div>
 
                   {/* Movie Poster with Hover Effect */}
-                  <div className="border-4 border-pink-500 flex justify-center items-center h-full">
+                  <div className="border-4 w-auto object-center object-fill border-pink-500 flex justify-center items-center h-auto">
                     <img
                       src={
                         movie.Poster !== "N/A"

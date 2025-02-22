@@ -11,7 +11,7 @@ import ProtectedRoute from "./ProtectedRoute"; // ✅ Import ProtectedRoute
 
 function App() {
   return (
-    <div className="md:min-w-[99vw]">
+    <div className=" ">
       <Router>
         <Header />
         <Routes>

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -18,7 +17,7 @@ const Header = () => {
     getData("Avengers");
   }, []);
 
-  //  Fetch movies while typing
+  // Fetch movies while typing
   useEffect(() => {
     if (searchQuery.trim() !== "") {
       const delaySearch = setTimeout(() => {
@@ -28,7 +27,7 @@ const Header = () => {
     }
   }, [searchQuery]);
 
-  //  Fetch movies from API
+  // Fetch movies from API
   const getData = async (query) => {
     try {
       const response = await axios.get("http://www.omdbapi.com/", {
@@ -46,7 +45,7 @@ const Header = () => {
   };
 
   return (
-    <div className="w-full h-[80px] px-6 py-4 flex items-center justify-between bg-gray-900 bg-opacity-80 backdrop-blur-lg shadow-lg ">
+    <div className="w-full h-[80px] px-6 py-4 flex items-center justify-between bg-gray-900 bg-opacity-80 backdrop-blur-lg shadow-lg">
       {/* IMDb Logo */}
       <div className="flex items-center">
         <Link to="/">
@@ -60,28 +59,25 @@ const Header = () => {
 
       {/* Desktop Navigation */}
       <div className="hidden lg:flex items-center gap-8 border-2 border-white">
-        <Link
-          to="/movies/popular"
-          className="text-lg text-white hover:text-red-500 transition duration-200"
-        >
+        <Link to="/movies/popular" className="text-lg text-white hover:text-red-500 transition duration-200">
           Popular
         </Link>
-        <Link
-          to="/movies/top_rated"
-          className="text-lg text-white hover:text-red-500 transition duration-200"
-        >
+        <Link to="/movies/top_rated" className="text-lg text-white hover:text-red-500 transition duration-200">
           Top Rated
         </Link>
-        <Link
-          to="/movies/upcoming"
-          className="text-lg text-white hover:text-red-500 transition duration-200"
-        >
+        <Link to="/movies/upcoming" className="text-lg text-white hover:text-red-500 transition duration-200">
           Upcoming
+        </Link>
+        <Link to="/favorites" className="text-lg text-white hover:text-yellow-500 transition duration-200">
+          Favorites
+        </Link>
+        <Link to="/wishlist" className="text-lg text-white hover:text-green-500 transition duration-200">
+          Wishlist
         </Link>
       </div>
 
       {/* Search Bar */}
-      <div className=" w-full max-w-[250px] sm:max-w-[300px] md:max-w-[350px] lg:max-w-[400px] border-2 border-white rounded-lg">
+      <div className="w-full max-w-[250px] sm:max-w-[300px] md:max-w-[350px] lg:max-w-[400px] border-2 border-white rounded-lg">
         <input
           type="text"
           placeholder="Search movies..."
@@ -89,7 +85,6 @@ const Header = () => {
           onChange={(e) => setSearchQuery(e.target.value)}
           className="w-full h-[45px] sm:h-[50px] px-4 pl-12 rounded-md bg-gray-800 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
         />
-       
       </div>
 
       {/* Authentication Buttons */}
@@ -106,16 +101,10 @@ const Header = () => {
           </>
         ) : (
           <>
-            <Link
-              to="/login"
-              className="w-[120px] h-[45px] flex items-center justify-center bg-blue-600 text-white text-lg rounded-md hover:bg-blue-700 transition"
-            >
+            <Link to="/login" className="w-[120px] h-[45px] flex items-center justify-center bg-blue-600 text-white text-lg rounded-md hover:bg-blue-700 transition">
               Login
             </Link>
-            <Link
-              to="/signup"
-              className="w-[120px] h-[45px] flex items-center justify-center bg-green-600 text-white text-lg rounded-md hover:bg-green-700 transition"
-            >
+            <Link to="/signup" className="w-[120px] h-[45px] flex items-center justify-center bg-green-600 text-white text-lg rounded-md hover:bg-green-700 transition">
               Sign Up
             </Link>
           </>
@@ -125,51 +114,33 @@ const Header = () => {
       {/* Mobile Menu Button */}
       <div className="lg:hidden flex items-center">
         {isMenuOpen ? (
-          <X
-            className="text-white cursor-pointer transition-transform transform hover:scale-110"
-            size={30}
-            onClick={() => setIsMenuOpen(false)}
-          />
+          <X className="text-white cursor-pointer transition-transform transform hover:scale-110" size={30} onClick={() => setIsMenuOpen(false)} />
         ) : (
-          <Menu
-            className="text-white cursor-pointer transition-transform transform hover:scale-110"
-            size={30}
-            onClick={() => setIsMenuOpen(true)}
-          />
+          <Menu className="text-white cursor-pointer transition-transform transform hover:scale-110" size={30} onClick={() => setIsMenuOpen(true)} />
         )}
       </div>
 
       {/* Mobile Navigation */}
-      <div
-        className={`absolute top-[80px] left-0 w-full bg-white  flex flex-col items-center gap-6 py-6 transition-all duration-300 ${
-          isMenuOpen ? "block" : "hidden"
-        }`}
-      >
-        <Link
-          to="/movies/popular"
-          className="text-lg text-white hover:text-red-500 transition"
-          onClick={() => setIsMenuOpen(false)}
-        >
+      <div className={`absolute top-[80px] left-0 w-full bg-gray-900 flex flex-col items-center gap-6 py-6 transition-all duration-300 ${isMenuOpen ? "block" : "hidden"}`}>
+        <Link to="/movies/popular" className="text-lg text-white hover:text-red-500 transition" onClick={() => setIsMenuOpen(false)}>
           Popular
         </Link>
-        <Link
-          to="/movies/top_rated"
-          className="text-lg text-white hover:text-red-500 transition"
-          onClick={() => setIsMenuOpen(false)}
-        >
+        <Link to="/movies/top_rated" className="text-lg text-white hover:text-red-500 transition" onClick={() => setIsMenuOpen(false)}>
           Top Rated
         </Link>
-        <Link
-          to="/movies/upcoming"
-          className="text-lg text-white hover:text-red-500 transition"
-          onClick={() => setIsMenuOpen(false)}
-        >
+        <Link to="/movies/upcoming" className="text-lg text-white hover:text-red-500 transition" onClick={() => setIsMenuOpen(false)}>
           Upcoming
+        </Link>
+        <Link to="/favorites" className="text-lg text-white hover:text-yellow-500 transition" onClick={() => setIsMenuOpen(false)}>
+          Favorites
+        </Link>
+        <Link to="/wishlist" className="text-lg text-white hover:text-green-500 transition" onClick={() => setIsMenuOpen(false)}>
+          Wishlist
         </Link>
 
         {user ? (
           <>
-            <span className="text-white  font-semibold w-[120px] h-[45px] flex items-center justify-center border-2 border-green-500">Welcome, {user}</span >
+            <span className="text-white font-semibold w-[120px] h-[45px] flex items-center justify-center border-2 border-green-500">Welcome, {user}</span>
             <button
               onClick={() => {
                 dispatch(logout());
@@ -182,18 +153,10 @@ const Header = () => {
           </>
         ) : (
           <>
-            <Link
-              to="/login"
-              className="w-[120px] h-[45px] flex items-center justify-center bg-blue-600 text-white text-lg rounded-md hover:bg-blue-700 transition"
-              onClick={() => setIsMenuOpen(false)}
-            >
+            <Link to="/login" className="w-[120px] h-[45px] flex items-center justify-center bg-blue-600 text-white text-lg rounded-md hover:bg-blue-700 transition" onClick={() => setIsMenuOpen(false)}>
               Login
             </Link>
-            <Link
-              to="/signup"
-              className="w-[120px] h-[45px] flex items-center justify-center bg-green-600 text-white text-lg rounded-md hover:bg-green-700 transition"
-              onClick={() => setIsMenuOpen(false)}
-            >
+            <Link to="/signup" className="w-[120px] h-[45px] flex items-center justify-center bg-green-600 text-white text-lg rounded-md hover:bg-green-700 transition" onClick={() => setIsMenuOpen(false)}>
               Sign Up
             </Link>
           </>

@@ -31,8 +31,7 @@ const Home = () => {
   };
 
   return (
-    <div className="w-full h-auto bg-gray-900 text-white pb-[100px] ">
-      <h1 className="text-white">hii</h1>
+    <div className="w-full max-h-screen bg-gray-900 text-white pb-[100px]  border-2 border-green-600">
       <div>
       <Carousel autoPlay transitionTime={3} infiniteLoop showStatus={false} showThumbs={false}>
         {popularMovies.length > 0 ? (
@@ -52,7 +51,7 @@ const Home = () => {
                 ></div>
 
                 {/* ✅ Movie Title Overlay */}
-                <div className="absolute bottom-10 left-0 right-0 text-center p-4 bg-black/80 backdrop-blur-md rounded-lg mx-6 sm:mx-10 md:mx-16 transition-all duration-300 border-2 border-white">
+                <div className="absolute bottom-10 left-0 right-0 text-center p-4  backdrop-blur-md rounded-lg mx-6 sm:mx-10 md:mx-16 transition-all duration-300 ">
                   <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold">{movie.title}</h2>
                   <p className="text-lg sm:text-xl text-gray-300">{movie.release_date}</p>
 

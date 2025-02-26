@@ -248,7 +248,7 @@ const Sidebar = () => {
       {(
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className={`fixed top-22 left-1 z-50 p-3 bg-blue-600 text-white rounded-md shadow-md hover:bg-blue-700 transition-all border border-white ${(isOpen==false)?'':'hidden'}`}
+          className={`fixed top-25 left-1 z-50 p-3 bg-blue-600 text-white rounded-md shadow-md hover:bg-blue-700 transition-all border border-white ${(isOpen==false)?'':'hidden'}`}
         > 
           {<Filter size={26} />}
         </button>

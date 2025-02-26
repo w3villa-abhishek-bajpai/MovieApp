@@ -23,10 +23,10 @@ const MovieList = () => {
       <Sidebar />
 
       {/* Movie Grid */}
-      <div className="flex-1 w-full min-h-screen bg-black text-white px-8 py-6  border-2 border-red-500">
+      <div className="w-full h-full bg-black text-white px-8 py-6  border-2 border-red-500">
         <h2 className="text-3xl font-bold mb-6">Movie Listings</h2>
 
-        <div className="flex flex-wrap justify-center gap-6">
+        <div className="flex flex-wrap justify-center gap-9 border-2 border-fuchsia-500">
           {filteredMovies.length > 0 ? (
             filteredMovies.map((movie) => <Cards key={movie.id} movie={movie} />)
           ) : (

@@ -28,13 +28,13 @@ const Cards = ({ movie }) => {
   return (
     <>
       {isLoading ? (
-        <div className="w-[300px] sm:w-[350px] md:w-[350px] lg:w-[360px] h-[420px] rounded-lg overflow-hidden border border-gray-600">
+        <div className="w-[400px] sm:w-[350px] md:w-[300px] lg:w-[290px] xl:w-[400px] h-[450px] rounded-lg overflow-hidden border border-gray-600 border-2 border-pink-500">
           <SkeletonTheme color="#202020" highlightColor="#444">
             <Skeleton height={420} duration={2} />
           </SkeletonTheme>
         </div>
       ) : (
-        <div className="relative w-[300px] sm:w-[350px] md:w-[350px] lg:w-[360px] h-[450px] rounded-lg overflow-hidden border border-gray-700 shadow-lg transition-transform duration-300 hover:scale-105 flex-wrap bg-white">
+        <div className="relative w-[400px] sm:w-[350px] md:w-[300px] lg:w-[290px] xl:[400px] h-[450px] rounded-lg overflow-hidden border border-gray-700 shadow-lg transition-transform duration-300 hover:scale-105  bg-white border-3 border-yellow-500" >
           {/* Favorite & Wishlist Buttons */}
           <div className="absolute top-2 right-2 flex gap-2">
             {/* Favorite Button */}

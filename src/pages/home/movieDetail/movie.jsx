@@ -73,7 +73,7 @@ const Movie = () => {
           ></div>
 
           {/* Movie Content */}
-          <div className="relative z-10 w-full max-w-4xl bg-gray-900 p-6 rounded-xl shadow-lg text-center">
+          <div className="relative z-10 w-full max-w-4xl bg-gray-900 p-6 rounded-xl shadow-lg text-center text-white">
             <img
               className="w-full h-[400px] sm:h-[500px] md:h-[550px] lg:h-[600px] rounded-lg shadow-xl object-cover"
               src={currentMovieDetail.poster_path 
@@ -102,7 +102,7 @@ const Movie = () => {
           </div>
 
           {/* ⭐ Reviews Section */}
-          <div className="relative z-10 w-full max-w-4xl bg-gray-900 p-6 rounded-xl shadow-lg mt-8">
+          <div className="relative z-10 w-full max-w-4xl bg-gray-900 p-6 rounded-xl shadow-lg mt-8 text-white">
             <h3 className="text-2xl font-bold mb-4">User Reviews</h3>
 
             {/* Display Reviews */}
@@ -124,7 +124,7 @@ const Movie = () => {
 
       {/* ✅ Review Modal with Background Blur */}
       {isModalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-md z-50">
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-md z-50 ">
           <div className="bg-white p-6 rounded-lg shadow-lg w-[90%] max-w-md transition-all transform scale-100">
             <h2 className="text-2xl font-bold mb-4 text-black">Write a Review</h2>
             

@@ -1,168 +1,323 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+
+
+
+// import React, { useState, useEffect, useRef } from "react";
+// import { Link, useNavigate } from "react-router-dom";
+// import { useSelector, useDispatch } from "react-redux";
+// import { logout } from "../../Store/Slice/authSlice";
+// import { setMovies } from "../../Store/Slice/movieSlice";
+// import { Search, Menu, X, Sun, Moon } from "lucide-react";
+// import axios from "axios";
+// import { useTranslation } from "react-i18next";
+
+// const TMDB_API_KEY = "e00941df3fc0eaa106c5464b43b3f69d";
+
+// const Header = ({ darkMode, setDarkMode }) => {
+//   const { t, i18n } = useTranslation();
+//   const user = useSelector((state) => state.auth.user);
+//   const dispatch = useDispatch();
+//   const navigate = useNavigate();
+//   const [searchQuery, setSearchQuery] = useState("");
+//   const [searchResults, setSearchResults] = useState([]);
+//   const [isMenuOpen, setIsMenuOpen] = useState(false);
+//   const [screenSize, setScreenSize] = useState(window.innerWidth);
+//   const searchRef = useRef(null);
+
+//   // ✅ Local Storage Fix
+//   const storedUser = localStorage.getItem("user.email");
+//   let userEmail = "Guest";
+
+//   if (storedUser) {
+//     try {
+//       userEmail = JSON.parse(storedUser)?.email || "Guest";
+//     } catch (error) {
+//       console.error("Error parsing user email:", error);
+//     }
+//   }
+
+//   useEffect(() => {
+//     fetchMovies("Avengers");
+//   }, []);
+
+//   useEffect(() => {
+//     const handleResize = () => setScreenSize(window.innerWidth);
+//     window.addEventListener("resize", handleResize);
+//     return () => window.removeEventListener("resize", handleResize);
+//   }, []);
+
+//   const fetchMovies = async (query) => {
+//     try {
+//       const response = await axios.get(
+//         `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&query=${query}`
+//       );
+//       if (response.data.results) {
+//         setSearchResults(response.data.results.slice(0, 5));
+//         dispatch(setMovies(response.data.results));
+//       } else {
+//         setSearchResults([]);
+//       }
+//     } catch (error) {
+//       console.error("Error fetching movie data:", error.message);
+//     }
+//   };
+
+//   return (
+//     <header className={`w-full px-6 py-3 flex items-center justify-between shadow-lg fixed top-0 left-0 right-0 z-50 ${darkMode ? "bg-gray-900 text-white" : "bg-white text-black"}`}>
+//       {/* IMDb Logo */}
+//       <Link to="/" className="flex items-center">
+//         <img
+//           className="cursor-pointer transition-transform hover:scale-105 w-16 sm:w-20 md:w-24 lg:w-18 xl:w-32 h-auto"
+//           src="https://upload.wikimedia.org/wikipedia/commons/6/69/IMDB_Logo_2016.svg"
+//           alt="IMDb Logo"
+//         />
+//       </Link>
+
+//       {/* Search Bar (Visible in tablet & larger screens) */}
+//       <div ref={searchRef} className="relative hidden md:flex w-[250px] lg:w-[300px] xl:w-[400px] 2xl:w-[500px]">
+//         <input
+//           type="text"
+//           placeholder={t("Search Movie Here.....")}
+//           value={searchQuery}
+//           onChange={(e) => setSearchQuery(e.target.value)}
+//           className={`w-full h-[35px] px-4 pl-12 rounded-md border border-gray-600 ${
+//             darkMode ? "bg-gray-800 text-white placeholder-gray-400" : "bg-gray-200 text-black placeholder-gray-600"
+//           } focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all`}
+//         />
+//         <Search className="absolute left-3 top-3 text-gray-400" size={20} />
+//       </div>
+
+//       {/* Navigation Links (Outside Hamburger for Desktop) */}
+//       <nav className="hidden lg:flex items-center gap-6">
+//         {[
+//           { name: t("popular"), path: "/movies/popular" },
+//           { name: t("topRated"), path: "/movies/top_rated" },
+//           { name: t("upcoming"), path: "/movies/upcoming" },
+//           { name: t("favorites"), path: "/favorites" },
+//           { name: t("wishlist"), path: "/wishlist" },
+//         ].map((item) => (
+//           <Link key={item.path} to={item.path} className="text-lg font-semibold hover:text-red-500 transition duration-200">
+//             {item.name}
+//           </Link>
+//         ))}
+//       </nav>
+
+//       {/* Mobile Menu Button */}
+//       <div className="flex items-center">
+//         {isMenuOpen ? (
+//           <X className={`cursor-pointer ${darkMode ? "text-white" : "text-black"}`} size={28} onClick={() => setIsMenuOpen(false)} />
+//         ) : (
+//           <Menu className={`cursor-pointer ${darkMode ? "text-white" : "text-black"}`} size={28} onClick={() => setIsMenuOpen(true)} />
+//         )}
+//       </div>
+
+//       {/* Hamburger Menu */}
+//       {isMenuOpen && (
+//         <div className="absolute top-[60px] left-0 w-full bg-gray-900 text-white flex flex-col items-center gap-4 py-6 transition-all duration-300 border-2 border-blue-600 rounded-md shadow-lg">
+//           {/* ✅ Mobile View: Show Everything */}
+//           {screenSize < 768 && (
+//             <>
+//               {/* Search Bar */}
+//               <div ref={searchRef} className="relative w-[80%]">
+//                 <input type="text" placeholder={t("Search Movie Here.....")} value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="w-full h-[35px] px-4 pl-12 rounded-md border border-gray-600 bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" />
+//                 <Search className="absolute left-3 top-2 text-gray-400" size={20} />
+//               </div>
+
+//               {/* Navigation Links */}
+//               {["popular", "topRated", "upcoming", "favorites", "wishlist"].map((key) => (
+//                 <Link key={key} to={`/movies/${key}`} className="text-lg">{t(key)}</Link>
+//               ))}
+//             </>
+//           )}
+
+//           {/* ✅ Tablet View: Show Buttons, Favorites, Wishlist, Logout */}
+//           {screenSize >= 768 && screenSize < 1024 && (
+//             <>
+//               {["favorites", "wishlist"].map((key) => (
+//                 <Link key={key} to={`/movies/${key}`} className="text-lg">{t(key)}</Link>
+//               ))}
+//             </>
+//           )}
+
+//           {/* ✅ Language & Dark Mode (Always Visible) */}
+//           <div className="flex flex-col items-center gap-3 w-full px-6">
+//             {/* Dark Mode Toggle */}
+//             <button onClick={() => setDarkMode((prev) => !prev)} className="p-2 bg-gray-700 text-white rounded-md hover:bg-gray-600 transition flex items-center gap-2">
+//               {darkMode ? <Sun size={20} /> : <Moon size={20} />}
+//               <span className="text-sm sm:text-md">Dark Mode</span>
+//             </button>
+
+//             {/* Language Selector */}
+//             <select onChange={(e) => i18n.changeLanguage(e.target.value)} className="p-2 bg-gray-700 text-white rounded-md cursor-pointer focus:ring focus:ring-blue-500 transition">
+//               <option value="en">English</option>
+//               <option value="es">Español</option>
+//               <option value="fr">Français</option>
+//             </select>
+//           </div>
+//         </div>
+//       )}
+//     </header>
+//   );
+// };
+
+// export default Header;
+
+
+
+import React, { useState, useEffect, useRef } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../Store/Slice/authSlice";
 import { setMovies } from "../../Store/Slice/movieSlice";
-import { Search, Menu, X } from "lucide-react";
+import { Search, Menu, X, Sun, Moon } from "lucide-react";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 
-const Header = () => {
+const TMDB_API_KEY = "e00941df3fc0eaa106c5464b43b3f69d";
+
+const Header = ({ darkMode, setDarkMode }) => {
+  const { t, i18n } = useTranslation();
   const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [screenSize, setScreenSize] = useState(window.innerWidth);
+  const searchRef = useRef(null);
 
-  // Load "Avengers" by default
+  // ✅ Local Storage Fix
+  const storedUser = localStorage.getItem("user.email");
+  let userEmail = "Guest";
+
+  if (storedUser) {
+    try {
+      userEmail = JSON.parse(storedUser)?.email || "Guest";
+    } catch (error) {
+      console.error("Error parsing user email:", error);
+    }
+  }
+
   useEffect(() => {
-    getData("Avengers");
+    fetchMovies("Avengers");
   }, []);
 
-  // Fetch movies while typing
   useEffect(() => {
-    if (searchQuery.trim() !== "") {
-      const delaySearch = setTimeout(() => {
-        getData(searchQuery);
-      }, 500);
-      return () => clearTimeout(delaySearch);
-    }
-  }, [searchQuery]);
+    const handleResize = () => setScreenSize(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
-  // Fetch movies from API
-  const getData = async (query) => {
+  const fetchMovies = async (query) => {
     try {
-      const response = await axios.get("http://www.omdbapi.com/", {
-        params: { apikey: "7b853542", s: query },
-      });
-
-      if (response.data.Search) {
-        dispatch(setMovies(response.data.Search));
+      const response = await axios.get(
+        `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&query=${query}`
+      );
+      if (response.data.results) {
+        setSearchResults(response.data.results.slice(0, 5));
+        dispatch(setMovies(response.data.results));
       } else {
-        dispatch(setMovies([]));
+        setSearchResults([]);
       }
     } catch (error) {
-      console.error("Error fetching movie data:", error);
+      console.error("Error fetching movie data:", error.message);
     }
   };
 
   return (
-    <div className="w-full h-[80px] px-6 py-4 flex items-center justify-between bg-gray-900 bg-opacity-80 backdrop-blur-lg shadow-lg">
+    <header className={`w-full px-6 py-3 flex items-center justify-between shadow-lg fixed top-0 left-0 right-0 z-50 ${darkMode ? "bg-gray-900 text-white" : "bg-white text-black"}`}>
       {/* IMDb Logo */}
-      <div className="flex items-center">
-        <Link to="/">
-          <img
-            className="w-24 sm:w-20 h-auto cursor-pointer transition-transform hover:scale-105"
-            src="https://upload.wikimedia.org/wikipedia/commons/6/69/IMDB_Logo_2016.svg"
-            alt="IMDb Logo"
-          />
-        </Link>
-      </div>
+      <Link to="/" className="flex items-center">
+        <img
+          className="cursor-pointer transition-transform hover:scale-105 w-16 sm:w-20 md:w-24 lg:w-18 xl:w-32 h-auto"
+          src="https://upload.wikimedia.org/wikipedia/commons/6/69/IMDB_Logo_2016.svg"
+          alt="IMDb Logo"
+        />
+      </Link>
 
-      {/* Desktop Navigation */}
-      <div className="hidden lg:flex items-center gap-8 border-2 border-white">
-        <Link to="/movies/popular" className="text-lg text-white hover:text-red-500 transition duration-200">
-          Popular
-        </Link>
-        <Link to="/movies/top_rated" className="text-lg text-white hover:text-red-500 transition duration-200">
-          Top Rated
-        </Link>
-        <Link to="/movies/upcoming" className="text-lg text-white hover:text-red-500 transition duration-200">
-          Upcoming
-        </Link>
-        <Link to="/favorites" className="text-lg text-white hover:text-yellow-500 transition duration-200">
-          Favorites
-        </Link>
-        <Link to="/wishlist" className="text-lg text-white hover:text-green-500 transition duration-200">
-          Wishlist
-        </Link>
-      </div>
-
-      {/* Search Bar */}
-      <div className="w-full max-w-[250px] sm:max-w-[300px] md:max-w-[350px] lg:max-w-[400px] border-2 border-white rounded-lg">
+      {/* Search Bar (Visible in tablet & larger screens) */}
+      <div ref={searchRef} className="relative hidden md:flex w-[250px] lg:w-[300px] xl:w-[400px] 2xl:w-[500px]">
         <input
           type="text"
-          placeholder="Search movies..."
+          placeholder={t("Search Movie Here.....")}
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full h-[45px] sm:h-[50px] px-4 pl-12 rounded-md bg-gray-800 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+          className={`w-full h-[35px] px-4 pl-12 rounded-md border border-gray-600 ${
+            darkMode ? "bg-gray-800 text-white placeholder-gray-400" : "bg-gray-200 text-black placeholder-gray-600"
+          } focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all`}
         />
+        <Search className="absolute left-3 top-3 text-gray-400" size={20} />
       </div>
 
-      {/* Authentication Buttons */}
-      <div className="hidden lg:flex gap-4">
-        {user ? (
-          <>
-            <span className="text-white font-semibold">Welcome, {user}</span>
-            <button
-              onClick={() => dispatch(logout())}
-              className="w-[120px] h-[45px] flex items-center justify-center bg-red-600 text-white text-lg rounded-md hover:bg-red-700 transition"
-            >
-              Logout
-            </button>
-          </>
-        ) : (
-          <>
-            <Link to="/login" className="w-[120px] h-[45px] flex items-center justify-center bg-blue-600 text-white text-lg rounded-md hover:bg-blue-700 transition">
-              Login
-            </Link>
-            <Link to="/signup" className="w-[120px] h-[45px] flex items-center justify-center bg-green-600 text-white text-lg rounded-md hover:bg-green-700 transition">
-              Sign Up
-            </Link>
-          </>
-        )}
-      </div>
+      {/* Navigation Links (Outside Hamburger for Desktop) */}
+      <nav className="hidden lg:flex items-center gap-6">
+        {[
+          { name: t("popular"), path: "/movies/popular" },
+          { name: t("topRated"), path: "/movies/top_rated" },
+          { name: t("upcoming"), path: "/movies/upcoming" },
+          { name: t("favorites"), path: "/favorites" },
+          { name: t("wishlist"), path: "/wishlist" },
+        ].map((item) => (
+          <Link key={item.path} to={item.path} className="text-lg font-semibold hover:text-red-500 transition duration-200">
+            {item.name}
+          </Link>
+        ))}
+      </nav>
 
       {/* Mobile Menu Button */}
-      <div className="lg:hidden flex items-center">
+      <div className="flex items-center">
         {isMenuOpen ? (
-          <X className="text-white cursor-pointer transition-transform transform hover:scale-110" size={30} onClick={() => setIsMenuOpen(false)} />
+          <X className={`cursor-pointer ${darkMode ? "text-white" : "text-black"}`} size={28} onClick={() => setIsMenuOpen(false)} />
         ) : (
-          <Menu className="text-white cursor-pointer transition-transform transform hover:scale-110" size={30} onClick={() => setIsMenuOpen(true)} />
+          <Menu className={`cursor-pointer ${darkMode ? "text-white" : "text-black"}`} size={28} onClick={() => setIsMenuOpen(true)} />
         )}
       </div>
 
-      {/* Mobile Navigation */}
-      <div className={`absolute top-[80px] left-0 w-full bg-gray-900 flex flex-col items-center gap-6 py-6 transition-all duration-300 ${isMenuOpen ? "block" : "hidden"}`}>
-        <Link to="/movies/popular" className="text-lg text-white hover:text-red-500 transition" onClick={() => setIsMenuOpen(false)}>
-          Popular
-        </Link>
-        <Link to="/movies/top_rated" className="text-lg text-white hover:text-red-500 transition" onClick={() => setIsMenuOpen(false)}>
-          Top Rated
-        </Link>
-        <Link to="/movies/upcoming" className="text-lg text-white hover:text-red-500 transition" onClick={() => setIsMenuOpen(false)}>
-          Upcoming
-        </Link>
-        <Link to="/favorites" className="text-lg text-white hover:text-yellow-500 transition" onClick={() => setIsMenuOpen(false)}>
-          Favorites
-        </Link>
-        <Link to="/wishlist" className="text-lg text-white hover:text-green-500 transition" onClick={() => setIsMenuOpen(false)}>
-          Wishlist
-        </Link>
+      {/* Hamburger Menu */}
+      {isMenuOpen && (
+        <div className="absolute top-[60px] left-0 w-full bg-gray-900 text-white flex flex-col items-center gap-4 py-6 transition-all duration-300 border-2 border-blue-600 rounded-md shadow-lg">
+          {/* ✅ Mobile View: Show Everything */}
+          {screenSize < 768 && (
+            <>
+              {/* Search Bar */}
+              <div ref={searchRef} className="relative w-[80%]">
+                <input type="text" placeholder={t("Search Movie Here.....")} value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="w-full h-[35px] px-4 pl-12 rounded-md border border-gray-600 bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" />
+                <Search className="absolute left-3 top-2 text-gray-400" size={20} />
+              </div>
 
-        {user ? (
-          <>
-            <span className="text-white font-semibold w-[120px] h-[45px] flex items-center justify-center border-2 border-green-500">Welcome, {user}</span>
-            <button
-              onClick={() => {
-                dispatch(logout());
-                setIsMenuOpen(false);
-              }}
-              className="w-[120px] h-[45px] flex items-center justify-center bg-red-600 text-white text-lg rounded-md hover:bg-red-700 transition"
-            >
-              Logout
+              {/* Navigation Links */}
+              {["popular", "topRated", "upcoming", "favorites", "wishlist"].map((key) => (
+                <Link key={key} to={`/movies/${key}`} className="text-lg">{t(key)}</Link>
+              ))}
+            </>
+          )}
+
+          {/* ✅ Tablet View: Now Includes Navigation Links */}
+          {screenSize >= 768 && screenSize < 1024 && (
+            <>
+              {["popular", "topRated", "upcoming", "favorites", "wishlist"].map((key) => (
+                <Link key={key} to={`/movies/${key}`} className="text-lg">{t(key)}</Link>
+              ))}
+            </>
+          )}
+
+          {/* ✅ Language & Dark Mode (Always Visible) */}
+          <div className="flex flex-col items-center gap-3 w-full px-6">
+            {/* Dark Mode Toggle */}
+            <button onClick={() => setDarkMode((prev) => !prev)} className="p-2 bg-gray-700 text-white rounded-md hover:bg-gray-600 transition flex items-center gap-2">
+              {darkMode ? <Sun size={20} /> : <Moon size={20} />}
+              <span className="text-sm sm:text-md">Dark Mode</span>
             </button>
-          </>
-        ) : (
-          <>
-            <Link to="/login" className="w-[120px] h-[45px] flex items-center justify-center bg-blue-600 text-white text-lg rounded-md hover:bg-blue-700 transition" onClick={() => setIsMenuOpen(false)}>
-              Login
-            </Link>
-            <Link to="/signup" className="w-[120px] h-[45px] flex items-center justify-center bg-green-600 text-white text-lg rounded-md hover:bg-green-700 transition" onClick={() => setIsMenuOpen(false)}>
-              Sign Up
-            </Link>
-          </>
-        )}
-      </div>
-    </div>
+
+            {/* Language Selector */}
+            <select onChange={(e) => i18n.changeLanguage(e.target.value)} className="p-2 bg-gray-700 text-white rounded-md cursor-pointer focus:ring focus:ring-blue-500 transition">
+              <option value="en">English</option>
+              <option value="es">Español</option>
+              <option value="fr">Français</option>
+            </select>
+          </div>
+        </div>
+      )}
+    </header>
   );
 };
 

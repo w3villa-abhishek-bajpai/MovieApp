@@ -1,28 +1,42 @@
+
+
 import React from "react";
 import { useSelector } from "react-redux";
 import Cards from "../card/card";
+import Sidebar from "../sidebar/Sidebar";
 
-const movieList = () => {
-  const movieList = useSelector((state) => state.movie.movies); // ✅ Fetch from Redux
+const MovieList = () => {
+  const movieList = useSelector((state) => state.movie.movies);
+  const filters = useSelector((state) => state.movie.filters);
+
+  // Filter movies based on Redux filters
+  const filteredMovies = movieList.filter((movie) => {
+    const meetsGenre = filters.genre ? movie.genre_ids.includes(parseInt(filters.genre)) : true;
+    const meetsYear = filters.year ? movie.release_date.startsWith(filters.year) : true;
+    const meetsRating = filters.rating ? movie.vote_average >= parseInt(filters.rating) : true;
+    return meetsGenre && meetsYear && meetsRating;
+  });
 
   return (
-    <div className="w-full min-h-screen bg-gradient-to-b from-gray-1000 to-black text-white   border-2 border-green-600">
-      {/* Movie Cards Grid */}
-      <div className="flex flex-wrap justify-center gap-6 border-2 border-yellow-500">
-  {movieList.length > 0 ? (
-    movieList.map((movie, index) => (
-      <Cards key={movie.imdbID || index} movie={movie} />
-    ))
-  ) : (
-    <p className="w-full text-center text-lg">No movies found.</p>
-  )}
-</div>
+    <div className="flex">
+      {/* Sidebar */}
+      <Sidebar />
 
+      {/* Movie Grid */}
+      <div className="flex-1 w-full min-h-screen bg-black text-white px-8 py-6  border-2 border-red-500">
+        <h2 className="text-3xl font-bold mb-6">Movie Listings</h2>
+
+        <div className="flex flex-wrap justify-center gap-6">
+          {filteredMovies.length > 0 ? (
+            filteredMovies.map((movie) => <Cards key={movie.id} movie={movie} />)
+          ) : (
+            <p className="text-lg">No movies found.</p>
+          )}
+        </div>
+      </div>
     </div>
   );
 };
 
-export default movieList;
-
-
+export default MovieList;
 

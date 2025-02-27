@@ -12,7 +12,7 @@ const Home = () => {
     fetchTrendingMovies();
   }, []);
 
-  // ✅ Fetch trending movies from TMDb API
+  // Fetch trending movies from TMDb API
   const fetchTrendingMovies = async () => {
     try {
       const response = await fetch(
@@ -38,7 +38,7 @@ const Home = () => {
           popularMovies.map((movie) => (
             <Link key={movie.id} to={`/movie/${movie.id}`} className="no-underline text-white">
               <div className="relative w-full h-[500px] sm:h-[610px] md:h-[720px] lg:h-[800px] flex items-center justify-center ">
-                {/* ✅ Full-Screen Background Image */}
+                {/*  Full-Screen Background Image */}
                 <div
                   className="absolute inset-0 w-full h-full bg-cover bg-center brightness-75 transition-all duration-500 hover:brightness-50"
                   style={{
@@ -50,12 +50,12 @@ const Home = () => {
                   }}
                 ></div>
 
-                {/* ✅ Movie Title Overlay */}
+                {/*  Movie Title Overlay */}
                 <div className="absolute bottom-10 left-0 right-0 text-center p-4  backdrop-blur-md rounded-lg mx-6 sm:mx-10 md:mx-16 transition-all duration-300 ">
                   <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold">{movie.title}</h2>
                   <p className="text-lg sm:text-xl text-gray-300">{movie.release_date}</p>
 
-                  {/* ✅ View Details Button (Appears on Hover) */}
+                  {/* View Details Button (Appears on Hover) */}
                   <div className="opacity-0 transition-opacity duration-300 hover:opacity-100 mt-4">
                     <button className="bg-red-600 px-5 py-2 text-lg font-semibold rounded-md shadow-md hover:bg-red-700 transition ">
                       View Details
@@ -71,7 +71,7 @@ const Home = () => {
       </Carousel>
       </div>
       <div className=""></div>
-      {/* ✅ Movie List Section */}
+      {/*  Movie List Section */}
       <MovieList />
     </div>
   );

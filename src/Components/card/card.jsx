@@ -15,7 +15,6 @@ const Cards = ({ movie }) => {
   const favorites = useSelector((state) => state.favorites.favorites);
   const wishlist = useSelector((state) => state.favorites.wishlist);
 
-  // MDb properties
   const isFavorite = favorites.some((fav) => fav.id === movie.id);
   const isWishlisted = wishlist.some((wish) => wish.id === movie.id);
 

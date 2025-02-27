@@ -26,7 +26,7 @@ function App() {
         {/* <Sidebar /> */}
 
         <Routes>
-          {/* ✅Protect the Home Route */}
+          {/* Protect the Home Route */}
           <Route
             path="/"
             element={

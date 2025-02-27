@@ -8,7 +8,7 @@ export const genres = [
   export const years = Array.from({ length: 24 }, (_, i) => (2023 - i).toString());
   
 
-  export const ratings = ["5", "6", "7", "8", "9"];
+  export const ratings = ["1","2","4","3","5", "6", "7", "8", "9"];
   
 
   export const platforms = ["Netflix", "Amazon Prime", "Disney+", "Hulu", "HBO Max"];

@@ -28,7 +28,7 @@ import { useSelector } from "react-redux";
 import Cards from "../card/card";
 
 const Wishlist = () => {
-  const wishlist = useSelector((state) => state.favorites.wishlist); // ✅ Fetch wishlist from Redux
+  const wishlist = useSelector((state) => state.favorites.wishlist); //  Fetch wishlist from Redux
 
   return (
     <div className="w-full min-h-screen bg-gray-900 text-white px-6 py-10">

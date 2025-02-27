@@ -108,7 +108,7 @@ import { useDispatch } from "react-redux";
 import { signup } from "../../Store/Slice/authSlice";
 import { useNavigate } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
-import { jwtDecode } from "jwt-decode"; // ✅ Fix import issue
+import { jwtDecode } from "jwt-decode"; //  Fix import issue
 
 const Signup = () => {
   const dispatch = useDispatch();
@@ -139,9 +139,9 @@ const Signup = () => {
     }
   };
 
-  // ✅ Handle Google Signup Success
+  //  Handle Google Signup Success
   const handleGoogleSignupSuccess = (credentialResponse) => {
-    const decodedUser = jwtDecode(credentialResponse.credential); // ✅ Corrected import usage
+    const decodedUser = jwtDecode(credentialResponse.credential); //  Corrected import usage
     console.log("Google User:", decodedUser);
 
     const googleUser = {
@@ -155,7 +155,7 @@ const Signup = () => {
     navigate("/"); // Redirect to homepage
   };
 
-  // ✅ Handle Google Signup Failure
+  //  Handle Google Signup Failure
   const handleGoogleSignupFailure = () => {
     console.log("Google Signup Failed");
   };
@@ -211,7 +211,7 @@ const Signup = () => {
           <div className="flex-1 border-t border-gray-300"></div>
         </div>
 
-        {/* ✅ Google Signup Button */}
+        {/* Google Signup Button */}
         <div className="flex justify-center">
           <GoogleLogin
             onSuccess={handleGoogleSignupSuccess}

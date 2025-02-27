@@ -193,7 +193,7 @@ const Header = ({ darkMode, setDarkMode }) => {
           </div>
         )}
 
-        {/* ✅ Navigation Links Inside Hamburger Menu */}
+        {/* Navigation Links Inside Hamburger Menu */}
         <div className="w-full flex flex-col items-center">
           {["popular", "topRated", "upcoming", "favorites", "wishlist"].map((key) => (
             <Link

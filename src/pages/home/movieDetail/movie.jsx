@@ -16,7 +16,7 @@ const Movie = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  // ✅ Fetch movie details from TMDb API
+  // Fetch movie details from TMDb API
   const getData = async () => {
     try {
       const response = await fetch(
@@ -29,13 +29,13 @@ const Movie = () => {
     }
   };
 
-  // ✅ Load reviews from localStorage
+  // Load reviews from localStorage
   const loadReviews = () => {
     const storedReviews = JSON.parse(localStorage.getItem(`reviews-${id}`)) || [];
     setReviews(storedReviews);
   };
 
-  // ✅ Submit a new review
+  //  Submit a new review
   const submitReview = () => {
     if (!reviewerName || !reviewText) {
       alert("Please enter your name and a review.");
@@ -92,7 +92,7 @@ const Movie = () => {
               <p className="text-gray-300">{currentMovieDetail.overview}</p>
             </div>
 
-            {/* ⭐ Write a Review Button */}
+            {/*  Write a Review Button */}
             <button 
               className="mt-6 px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
               onClick={() => setIsModalOpen(true)}
@@ -101,7 +101,7 @@ const Movie = () => {
             </button>
           </div>
 
-          {/* ⭐ Reviews Section */}
+          {/*  Reviews Section */}
           <div className="relative z-10 w-full max-w-4xl bg-gray-900 p-6 rounded-xl shadow-lg mt-8 text-white">
             <h3 className="text-2xl font-bold mb-4">User Reviews</h3>
 
@@ -122,7 +122,7 @@ const Movie = () => {
         <h2 className="text-center text-2xl mt-20">Movie details not found.</h2>
       )}
 
-      {/* ✅ Review Modal with Background Blur */}
+      {/*  Review Modal with Background Blur */}
       {isModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-md z-50 ">
           <div className="bg-white p-6 rounded-lg shadow-lg w-[90%] max-w-md transition-all transform scale-100">

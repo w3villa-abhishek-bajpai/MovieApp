@@ -31,16 +31,16 @@ const Home = () => {
   };
 
   return (
-    <div className="w-full max-h-screen bg-gray-900 text-white pb-[100px]  border-2 border-green-600">
+    <div className="w-full max-h-screen bg-gray-900 text-white pb-[100px]  ">
       <div>
       <Carousel autoPlay transitionTime={3} infiniteLoop showStatus={false} showThumbs={false}>
         {popularMovies.length > 0 ? (
           popularMovies.map((movie) => (
             <Link key={movie.id} to={`/movie/${movie.id}`} className="no-underline text-white">
-              <div className="relative w-full h-[500px] sm:h-[610px] md:h-[720px] lg:h-[800px] flex items-center justify-center border-2 border-amber-600">
+              <div className="relative w-full h-[500px] sm:h-[610px] md:h-[720px] lg:h-[800px] flex items-center justify-center ">
                 {/* ✅ Full-Screen Background Image */}
                 <div
-                  className="absolute inset-0 w-full h-full bg-cover bg-center brightness-75 transition-all duration-500 hover:brightness-50 border-4 border-red-400"
+                  className="absolute inset-0 w-full h-full bg-cover bg-center brightness-75 transition-all duration-500 hover:brightness-50"
                   style={{
                     backgroundImage: `url(${ 
                       movie.backdrop_path
@@ -57,7 +57,7 @@ const Home = () => {
 
                   {/* ✅ View Details Button (Appears on Hover) */}
                   <div className="opacity-0 transition-opacity duration-300 hover:opacity-100 mt-4">
-                    <button className="bg-red-600 px-5 py-2 text-lg font-semibold rounded-md shadow-md hover:bg-red-700 transition border-3 border-yellow-500">
+                    <button className="bg-red-600 px-5 py-2 text-lg font-semibold rounded-md shadow-md hover:bg-red-700 transition ">
                       View Details
                     </button>
                   </div>
